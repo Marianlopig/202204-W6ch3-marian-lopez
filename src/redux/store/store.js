@@ -3,7 +3,7 @@ import phoneSlice from "../features/phone/phoneSlice";
 
 const store = configureStore({
   reducer: {
-    numbers: phoneSlice,
+    phone: phoneSlice,
   },
 });
 
