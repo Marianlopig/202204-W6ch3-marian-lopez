@@ -3,16 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import PhoneContextProvider from "./contexts/PhoneContextProvider";
 import { Provider } from "react-redux";
 import store from "./redux/store/store";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PhoneContextProvider>
-        <App />
-      </PhoneContextProvider>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
