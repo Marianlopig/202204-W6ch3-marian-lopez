@@ -1,5 +1,6 @@
 import { screen, render } from "@testing-library/react";
-import PhoneContextProvider from "../../contexts/PhoneContextProvider";
+import { Provider } from "react-redux";
+import store from "../../redux/store/store";
 import Info from "./Info";
 
 describe("Given an Info component", () => {
@@ -8,9 +9,9 @@ describe("Given an Info component", () => {
       const showedText = "Calling...";
 
       render(
-        <PhoneContextProvider>
+        <Provider store={store}>
           <Info />
-        </PhoneContextProvider>
+        </Provider>
       );
       const textInfo = screen.getByText(showedText);
 
