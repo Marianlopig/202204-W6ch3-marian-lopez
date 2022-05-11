@@ -1,19 +1,31 @@
 import { screen, render } from "@testing-library/react";
-import PhoneContext from "../../contexts/PhoneContext";
+import { Provider } from "react-redux";
+import store from "../../redux/store/store";
 import Display from "./Display";
 
 describe("Given a Display component", () => {
   describe("When it take a 627955776 number", () => {
     test("Then it should print the next number 627955776", () => {
       const showedNumber = "627955776";
-      const value = {
-        phoneNumber: "627955776",
+
+      const mockState = {
+        phone: {
+          calling: false,
+          numbers: [6, 2, 7, 9, 5, 5, 7, 7, 6],
+        },
+      };
+
+      const mockStore = {
+        ...store,
+        getState: () => {
+          return mockState;
+        },
       };
 
       render(
-        <PhoneContext.Provider value={value}>
+        <Provider store={mockStore}>
           <Display />
-        </PhoneContext.Provider>
+        </Provider>
       );
       const textInfo = screen.getByText(showedNumber);
 
