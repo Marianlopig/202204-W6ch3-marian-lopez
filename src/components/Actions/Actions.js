@@ -1,10 +1,26 @@
-import { useContext } from "react";
-import PhoneContext from "../../contexts/PhoneContext";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  callActionCreator,
+  hangActionCreator,
+} from "../../redux/features/phone/phoneSlice";
 import Action from "../Action/Action";
 import Display from "../Display/Display";
 
 const Actions = () => {
-  const { calling, phoneNumber, call, hang } = useContext(PhoneContext);
+  const { numbers, calling } = useSelector(({ phone }) => phone);
+  const dispatch = useDispatch();
+  const timer = useRef(null);
+  const hang = () => {
+    clearTimeout(timer.current);
+    dispatch(hangActionCreator());
+  };
+  const call = () => {
+    dispatch(callActionCreator());
+    timer.current = setTimeout(() => {
+      hang();
+    }, 5000);
+  };
 
   return (
     <>
@@ -12,7 +28,7 @@ const Actions = () => {
       {!calling && (
         <Action
           action="call"
-          isActive={phoneNumber.length === 9}
+          isActive={numbers.length === 9}
           actionOnClick={call}
         />
       )}
