@@ -5,3 +5,5 @@
 ##modificaciones
 #calling
 #not calling
+addNumber
+deleteNumber
